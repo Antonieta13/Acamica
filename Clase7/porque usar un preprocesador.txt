@@ -1,0 +1,182 @@
+¿Por qué usar un preprocesador CSS?
+
+Qué es un prepcoresador de CSS?
+Un preprocesador lo que hace es convertir una forma de datos a otra. En el caso de CSS, preprocesadores como Less o Sass reciben un input de datos y producen un código CSS. Es como una especie de traductor, nosotros le indicamos un intaxis y nos devuelve otra. También suelo decir que usar Sass o Less es como programar la hoja de estilos ya que nos encontraremos con variables, bucles, herencia, “funciones”… pero esto hablaré un poco más adelante.
+
+Qué ventajas tienes usar un preprocesador de CSS?
+CSS es una forma de programación declarativa, lo que tu escribes el lo que usa directamente el navegador, no precisa compilar el código como podría suceder con Java.
+
+Muchos desarrolladores, entre los que me incluyo, piensan que es mejor escribir las hojas de estilo a mano porque emplear un preprocesador añade más complejidad al flujo de trabajo o de que la curva de aprendizaje sea demasiado alta. Sin embargo, un preprocesador hace el trabajo muchísimo más fácil sobre todo en temas de web responsive y no es tan complicado de aprender, en un día podrías empezar a utilizarlo perfectamente.
+
+Variables
+Uno de los casos que pueden surgir en un día a día es que estés diseñando una web y el color principal cambie, ya sea por cambio de logo, gusto etc. Si estuvieras escribiendo la hoja de estilos a mano tener que cambiar todos los estilos que emplean el antiguo color sería un lastre. Con un preprocesador se puede emplear variables, por ejemplo podemos tener una variable que almacene el color principal de la web y otro alternativo.
+
+$color-principal:#122033;
+$color-alt:#96A8C0;
+ 
+a {
+    color: $color-principal;
+}
+
+a:hover {
+    color: $color-alt;
+}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+$color-principal:#122033;
+$color-alt:#96A8C0;
+ 
+a {
+    color: $color-principal;
+}
+ 
+a:hover {
+    color: $color-alt;
+}
+De esta manera si hubiera algún cambio crítico, podríamos cambiarlo de manera muy sencilla.
+
+Reducir código repetitivo
+Otro caso es el empleo de código repetitvo. En css es inevitable que varios elementos compartan un mismo estilo o incluso se hace una clase aparte para no añadir más líneas y no complicar una regla.  Por ejemplo
+
+p{
+    padding-top:25px;
+    padding-bottom:25px;
+    text-align:center;
+    font-weight:100;
+}
+
+.titulo{
+    padding-top:25px;
+    padding-bottom:25px;
+    text-align:center;
+    font-weight:bold;
+}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+p{
+    padding-top:25px;
+    padding-bottom:25px;
+    text-align:center;
+    font-weight:100;
+}
+ 
+.titulo{
+    padding-top:25px;
+    padding-bottom:25px;
+    text-align:center;
+    font-weight:bold;
+}
+Aquí podemos ver como 2 elementos comparten hasta 3 atributos. Como tienen una atributos diferente que es el grosor de la fuente, usar un selector con coma no nos valdría en este caso para reducir el código. Por tanto, si empelamos un preprocesador podemos emplear lo que se conoce como mixin.
+
+@mixing textoEspaciadoCentrado{
+    padding-top:25px;
+    padding-bottom:25px;
+    text-align:center;
+}
+
+p{
+    @include textoEspaciadoCentrado;
+    font-weight:100;
+}
+
+.titulo{
+    @include textoEspaciadoCentrado;
+    font-weight:bold;
+}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+@mixing textoEspaciadoCentrado{
+    padding-top:25px;
+    padding-bottom:25px;
+    text-align:center;
+}
+ 
+p{
+    @include textoEspaciadoCentrado;
+    font-weight:100;
+}
+ 
+.titulo{
+    @include textoEspaciadoCentrado;
+    font-weight:bold;
+}
+De esta forma lo que hacemos es llamar al mixin e implementar las reglas que tenga asignadas. Como podeis ver nos queda un código más limpio y resumido. Aunque esto es sólo una pequeña parte del mixin que nos puede ofrecer ya que podríamos pesarle parámetros.
+
+Asegurar la compatibilidad entre navegadores
+Otro ejemplo de mixin y de paso explicar otra de las ventajas de un preprocesador es el tema de compatibilidad de navegadores. Si queremos que nuestra web sea compatible lo máximo posible en todos los navegadores tenemos que emplear los famosos prefijos (-webkit-, -moz-, -o-). Aunque si una persona tiene sus navegadores al día, casi no es preciso emplearlos pero siempre puede darse el caso de que un usuario no tenga un navegador actualizado. Tampoco es preciso irse a un chrome 3.0 pero igual en un chrome 27.0 ciertas características de CSS no son compatibles sin el respectivo prefijo.
+
+Con los mixin podemos ahorrarnos un trabajo muy grande a la hora de establecer los prefijos.
+
+@mixin borde-redondo($valor){
+    -webkit-border-radius: $valor;
+    -moz-border-radius: $valor;
+    -ms-border-radius: $valor;
+    -o-border-radius: $valor;
+    border-radius: $valor;
+
+}
+
+.container {
+    @include borde-redondo(4px);
+}
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+@mixin borde-redondo($valor){
+    -webkit-border-radius: $valor;
+    -moz-border-radius: $valor;
+    -ms-border-radius: $valor;
+    -o-border-radius: $valor;
+    border-radius: $valor;
+ 
+}
+ 
+.container {
+    @include borde-redondo(4px);
+}
+Como puedes observar, con un preprocesador se puede reducir mucho trabajo y evitar un código repetitivo y confuso algo que en CSS va a pasar casi al 100% si tienes un sitio web con un diseño medianamente complejo. Al emplear un preprocesador podemos tener un código mucho más rápido, eficiente y mantenible.
+
+Y hasta aquí en qué consiste un preprocesador de CSS, espero que os haya gustado. A seguir picando 🙂
+
+ 

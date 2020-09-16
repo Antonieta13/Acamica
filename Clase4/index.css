@@ -1,0 +1,15 @@
+body {
+    background-color: rgba rgb(104, 161, 226);
+    color: white;
+}
+
+header {
+ background-color: slateblue;
+ color: thistle;
+}
+
+li {
+    background-color: yellow;
+    color: black;
+}
+

@@ -1,0 +1,13 @@
+.header {
+    background-color: $main-color;
+    color:white;
+    height: $navbar-height;
+
+    &--navbar {
+        float: right;
+
+        &--container {
+            background-color: white;
+        }
+    }
+}

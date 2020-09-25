@@ -1,0 +1,17 @@
+
+.header {
+    background-color: black;
+    color: black;
+    height: 100px;
+}
+
+.header--navbar {
+    background-color: white;
+}
+
+body{
+    background-color: white;
+    color: black;
+    font-family: "Roboto, sans-serif";
+    font-size: 16px;
+}

@@ -1,0 +1,9 @@
+@import 'styles/variables';
+@import url 'https://fonts.googleapis.com/css2?family=Open+Sans';
+@import 'styles/navbar';
+
+body{
+    background-color: $secondary-color;
+    font-family: $main-color;
+    font-size: $font-size;
+}
